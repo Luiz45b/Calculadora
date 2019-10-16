@@ -12,7 +12,114 @@
   <script src="lib/jasmine-3.2.1/boot.js"></script>
   <script src="lib/jquery.slim.js"></script>
 
-  <!-- Adicione aqui seus scripts para testar -->
+     <script defer>
+        function calc(valor){
+            var obj = document.getElementById("resultado").value;
+            var result = 0;
+            let operador = ["+", "-","/", "*"];
+            var verdadeiro = true;
+            var ponto = true;
+            var guardaPonto = 0;
+            var localiza = 0;
+            var opComp = "";
+            var opCompResult = true;
+
+                //version 1
+                if(Number.parseInt(valor) || valor == "0"){
+                    obj = document.getElementById("resultado").value+=valor;
+                }
+
+                for(var i = 0;i < obj.length;i++){
+                    
+                    for(var op = 0;op < operador.length;op++){
+                    if(obj[i] == operador[op]){
+                        verdadeiro = false;
+                        guardaPonto = i;
+                        localiza = guardaPonto+1;
+                        opComp = obj[i];
+                    
+                        }
+                    }
+
+                    }
+                
+                if(!verdadeiro && opComp != "" && valor == "resultado"){
+                    erro = true;
+                    opComp = "";
+                }
+
+                for(var p = guardaPonto;p<obj.length;p++){
+                    if(obj[p] == "."){
+                        ponto = !ponto;
+                    }
+                }
+                if(verdadeiro){
+
+                    if(Number.parseInt(obj[0]) && ponto && valor == "." ||
+                     obj[0] == "0" && ponto && valor == "."){
+                        document.getElementById("resultado").value+=valor;
+                    }
+
+                }else{
+                    guardaPonto += 1;
+                    if(Number.parseInt(obj[guardaPonto]) && ponto && valor == "."
+                     || obj[guardaPonto] == "0" && valor == "." && ponto){
+                        document.getElementById("resultado").value +=valor;
+                }
+                }
+
+                if(Number.parseInt(obj[0]) && verdadeiro && valor == "+" || 
+                obj[0] == "0" && verdadeiro && valor == "+" || Number.parseInt(obj[0]) 
+                && verdadeiro && valor == "-" || obj[0] == "0" && verdadeiro && valor == "-" || Number.parseInt(obj[0]) 
+                && verdadeiro && valor == "" || obj[0] == "0" && verdadeiro && valor == "" || Number.parseInt(obj[0])
+                && verdadeiro && valor == "/" || obj[0] == "0" && verdadeiro && valor == "/"){
+
+                    obj = document.getElementById("resultado").value += valor;
+
+                }
+
+                    if(erro){
+                        document.getElementById("resultado").value = "erro de operação";
+                        verdadeiro = true;
+                    }
+                    if(valor == "resultado" && Number.parseInt(obj[0]) ||
+                     valor == "resultado" && obj[0] == "0"){
+
+                        result = eval(obj);
+                        obj = document.getElementById("resultado").value = result;
+                        verdadeiro = true;
+                    }
+
+                }
+
+</script>
+</head>
+<body>
+    <div class="calculadora">
+        <input type="text" id="resultado" />
+
+        <button value="9" onclick="calc(value)" class="numero">9</button>
+        <button value="8" onclick="calc(value)" class="numero">8</button>
+        <button value="7" onclick="calc(value)" class="numero">7</button>
+        <button value="+" onclick="calc(value)" class="operacao somar">+</button>
+        
+        <button value="6" onclick="calc(value)" class="numero">6</button>
+        <button value="5" onclick="calc(value)" class="numero">5</button>
+        <button value="4" onclick="calc(value)" class="numero">4</button>
+        <button value="-" onclick="calc(value)" class="operacao subtrair">-</button>
+        
+        <button value="3" onclick="calc(value)" class="numero">3</button>
+        <button value="2" onclick="calc(value)" class="numero">2</button>
+        <button value="1" onclick="calc(value)" class="numero">1</button>
+        <button value="" onclick="calc(value)" class="operacao multiplicar"></button>
+        
+        <button value="0" onclick="calc(value)" class="numero">0</button>
+        <button value="." onclick="calc(value)" class="numero">.</button>
+        <button value="resultado" onclick="calc(value)" class="resultar">=</button>
+        <button value="/" onclick="calc(value)" class="operacao dividir">/</button>
+    </div>
+</body>
+</html>
 
   <!-- Adicione acima os scripts -->
 
